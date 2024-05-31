@@ -1,3 +1,5 @@
+import { ReactNode, ReactSVG } from "react";
+
 export interface User {
     id: number;
     name: string;
@@ -10,3 +12,4 @@ export type PageProps<T extends Record<string, unknown> = Record<string, unknown
         user: User;
     };
 };
+
