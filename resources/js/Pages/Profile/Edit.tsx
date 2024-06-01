@@ -1,37 +1,90 @@
 import AuthenticatedLayout from '@/Layouts/AuthenticatedLayout';
-import DeleteUserForm from './Partials/DeleteUserForm';
-import UpdatePasswordForm from './Partials/UpdatePasswordForm';
-import UpdateProfileInformationForm from './Partials/UpdateProfileInformationForm';
-import { Head } from '@inertiajs/react';
 import { PageProps } from '@/types';
+import { Button } from "@/Components/ui/button"
+import {
+  Card,
+  CardContent,
+  CardDescription,
+  CardFooter,
+  CardHeader,
+  CardTitle,
+} from "@/Components/ui/card"
+import { Checkbox } from "@/Components/ui/checkbox"
+import { Input } from "@/Components/ui/input"
+import { Link } from '@inertiajs/react';
+import { SettingWrapper } from '@/Layouts/SettingWrapper';
 
 export default function Edit({ auth, mustVerifyEmail, status }: PageProps<{ mustVerifyEmail: boolean, status?: string }>) {
     return (
-        <AuthenticatedLayout
-            user={auth.user}
-            header={<h2 className="font-semibold text-xl text-gray-800 leading-tight">Profile</h2>}
-        >
-            <Head title="Profile" />
-
-            <div className="py-12">
-                <div className="max-w-7xl mx-auto sm:px-6 lg:px-8 space-y-6">
-                    <div className="p-4 sm:p-8 bg-white shadow sm:rounded-lg">
-                        <UpdateProfileInformationForm
-                            mustVerifyEmail={mustVerifyEmail}
-                            status={status}
-                            className="max-w-xl"
-                        />
-                    </div>
-
-                    <div className="p-4 sm:p-8 bg-white shadow sm:rounded-lg">
-                        <UpdatePasswordForm className="max-w-xl" />
-                    </div>
-
-                    <div className="p-4 sm:p-8 bg-white shadow sm:rounded-lg">
-                        <DeleteUserForm className="max-w-xl" />
-                    </div>
-                </div>
+    <SettingWrapper 
+        user={auth.user}
+        header={<h2 className="font-semibold text-xl text-gray-800 leading-tight">Profile settings</h2>}
+    >
+        
+            <div className="mx-auto grid w-full max-w-6xl gap-2">
+            <h1 className="text-3xl font-semibold">Settings</h1>
             </div>
-        </AuthenticatedLayout>
-    );
-}
+            <div className="mx-auto grid w-full max-w-6xl items-start gap-6 md:grid-cols-[180px_1fr] lg:grid-cols-[250px_1fr]">
+            <nav
+                className="grid gap-4 text-sm text-muted-foreground" x-chunk="dashboard-04-chunk-0"
+            >
+                <Link href="#" className="font-semibold text-primary">
+                General
+                </Link>
+                <Link href="#">Security</Link>
+                <Link href="#">Integrations</Link>
+                <Link href="#">Support</Link>
+                <Link href="#">Organizations</Link>
+                <Link href="#">Advanced</Link>
+            </nav>
+            <div className="grid gap-6">
+                <Card x-chunk="dashboard-04-chunk-1">
+                <CardHeader>
+                    <CardTitle>Store Name</CardTitle>
+                    <CardDescription>
+                    Used to identify your store in the marketplace.
+                    </CardDescription>
+                </CardHeader>
+                <CardContent>
+                    <form>
+                    <Input placeholder="Store Name" />
+                    </form>
+                </CardContent>
+                <CardFooter className="border-t px-6 py-4">
+                    <Button>Save</Button>
+                </CardFooter>
+                </Card>
+                <Card x-chunk="dashboard-04-chunk-2">
+                <CardHeader>
+                    <CardTitle>Plugins Directory</CardTitle>
+                    <CardDescription>
+                    The directory within your project, in which your plugins are
+                    located.
+                    </CardDescription>
+                </CardHeader>
+                <CardContent>
+                    <form className="flex flex-col gap-4">
+                    <Input
+                        placeholder="Project Name"
+                        defaultValue="/content/plugins"
+                    />
+                    <div className="flex items-center space-x-2">
+                        <Checkbox id="include" defaultChecked />
+                        <label
+                        htmlFor="include"
+                        className="text-sm font-medium leading-none peer-disabled:cursor-not-allowed peer-disabled:opacity-70"
+                        >
+                        Allow administrators to change the directory.
+                        </label>
+                    </div>
+                    </form>
+                </CardContent>
+                <CardFooter className="border-t px-6 py-4">
+                    <Button>Save</Button>
+                </CardFooter>
+                </Card>
+            </div>
+            </div>
+    </SettingWrapper>
+)}
+

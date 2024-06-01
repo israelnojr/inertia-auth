@@ -1,4 +1,4 @@
-import { ReactNode, ReactSVG } from "react";
+import { IconType } from 'react-icons';
 
 export interface User {
     id: number;
@@ -13,3 +13,13 @@ export type PageProps<T extends Record<string, unknown> = Record<string, unknown
     };
 };
 
+export interface BreadcrumProps{
+    title: string;
+    url: string
+}
+
+export interface SidebarItem {
+    name: string;
+    icon: IconType
+    url: string;
+}
